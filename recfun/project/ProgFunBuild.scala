@@ -1,8 +1,9 @@
 import sbt._
 import Keys._
 
-import scalaz.Scalaz.mkIdentity
+import scalaz.syntax.validation._
 import scalaz.{Success, Failure}
+
 import com.typesafe.sbteclipse.plugin.EclipsePlugin.EclipseKeys
 
 /**

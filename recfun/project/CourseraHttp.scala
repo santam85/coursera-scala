@@ -1,10 +1,12 @@
 import dispatch.{Request, Http, NoLogging, StatusCode, url}
-import cc.spray.json.{JsNull, JsonParser, DefaultJsonProtocol, JsValue}
+import spray.json.{JsNull, JsonParser, DefaultJsonProtocol, JsValue}
 import RichJsValue._
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.commons.codec.binary.{Hex, Base64}
 import java.io.{IOException, File, FileInputStream}
-import scalaz.Scalaz.{mkIdentity, ValidationNEL}
+
+import scalaz._
+import syntax.validation._
 
 import Settings._
 import sbt._
@@ -66,7 +68,7 @@ object CourseraHttp {
   }
    
 
-  private def executeRequest[T](req: Request)(parse: String => ValidationNEL[String, T]): ValidationNEL[String, T] = {
+  private def executeRequest[T](req: Request)(parse: String => ValidationNel[String, T]): ValidationNel[String, T] = {
     try {
       try http(req >- { res => parse(res) }) catch {
         case ex: javax.net.ssl.SSLPeerUnverifiedException =>
@@ -85,7 +87,7 @@ object CourseraHttp {
    * SUBMITTING
    */
 
-  def getChallenge(email: String, submitProject: ProjectDetails): ValidationNEL[String, Challenge] = {
+  def getChallenge(email: String, submitProject: ProjectDetails): ValidationNel[String, Challenge] = {
     val baseReq = url(challengeUrl(submitProject.courseId))
     val withArgs = baseReq << Map("email_address" -> email,
                                   "assignment_part_sid" -> submitProject.assignmentPartId,
@@ -102,7 +104,7 @@ object CourseraHttp {
     }
   }
 
-  def submitSolution(sourcesJar: File, submitProject: ProjectDetails, challenge: Challenge, chResponse: String): ValidationNEL[String, String] = {
+  def submitSolution(sourcesJar: File, submitProject: ProjectDetails, challenge: Challenge, chResponse: String): ValidationNel[String, String] = {
     val fileLength = sourcesJar.length()
     if (!sourcesJar.exists()) {
       ("Sources jar archive does not exist\n"+ sourcesJar.getAbsolutePath).failNel
@@ -153,7 +155,7 @@ object CourseraHttp {
    * DOWNLOADING SUBMISSIONS
    */
 
-  // def downloadFromQueue(queue: String, targetJar: File, apiKey: String): ValidationNEL[String, QueueResult] = {
+  // def downloadFromQueue(queue: String, targetJar: File, apiKey: String): ValidationNel[String, QueueResult] = {
   //   val baseReq = url(Settings.submitQueueUrl)
   //   val withArgsAndHeader = baseReq << Map("queue" -> queue) <:< Map("X-api-key" -> apiKey)
 
@@ -162,11 +164,11 @@ object CourseraHttp {
   //   }
   // }
 
-  def readJsonFile(jsonFile: File, targetJar: File): ValidationNEL[String, QueueResult] = {
+  def readJsonFile(jsonFile: File, targetJar: File): ValidationNel[String, QueueResult] = {
     extractJson(sbt.IO.read(jsonFile), targetJar)
   }
 
-  def extractJson(jsonData: String, targetJar: File): ValidationNEL[String, QueueResult] = {
+  def extractJson(jsonData: String, targetJar: File): ValidationNel[String, QueueResult] = {
     import SubmitJsonProtocol._
     for {
       jsonSubmission <- {
@@ -197,7 +199,7 @@ object CourseraHttp {
     } yield queueResult
   }
 
-  def unpackJar(file: File, targetDirectory: File): ValidationNEL[String, Unit] = {
+  def unpackJar(file: File, targetDirectory: File): ValidationNel[String, Unit] = {
     try {
       val files = sbt.IO.unzip(file, targetDirectory)
       if (files.isEmpty)
@@ -221,7 +223,7 @@ object CourseraHttp {
    * SUBMITTING GRADES
    */
 
-  def submitGrade(feedback: String, score: String, apiState: String, apiKey: String, gradeProject: ProjectDetails, logger: Option[Logger]): ValidationNEL[String, Unit] = {
+  def submitGrade(feedback: String, score: String, apiState: String, apiKey: String, gradeProject: ProjectDetails, logger: Option[Logger]): ValidationNel[String, Unit] = {
     import DefaultJsonProtocol._
     val baseReq = url(Settings.uploadFeedbackUrl(gradeProject.courseId))
     val reqArgs = Map("api_state" -> apiState, "score" -> score, "feedback" -> feedback)
