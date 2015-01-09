@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28c78d2f-d485-4e22-94cc-5b9addab08ce" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/SBT___scala_compiler_bundle_2_10_4.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/SBT__org_scala_lang_scala_library_2_10_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/SBT__org_scala_lang_scala_library_2_10_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/assignment.iml" afterPath="$PROJECT_DIR$/.idea/modules/assignment.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/submission.iml" afterPath="$PROJECT_DIR$/.idea/modules/submission.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="progfun-recfun.iws" />
@@ -587,7 +582,7 @@
       <workItem from="1411916584620" duration="728000" />
       <workItem from="1411973954648" duration="1271000" />
       <workItem from="1420790058631" duration="41000" />
-      <workItem from="1420790125571" duration="164000" />
+      <workItem from="1420790125571" duration="189000" />
     </task>
     <task id="LOCAL-00001" summary="Added .gitignore">
       <created>1420790285570</created>
@@ -595,11 +590,17 @@
       <option name="project" value="LOCAL" />
       <updated>1420790285570</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added .gitignore">
+      <created>1420790297027</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1420790297027</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13626000" />
+    <option name="totallyTimeSpent" value="13651000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="940" extended-state="0" />
