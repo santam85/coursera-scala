@@ -1,0 +1,10 @@
+[0m[[0mdebug[0m] [0mRunning TaskDef(recfun.PascalSuite, sbt.SubclassFingerprintWrapper@16cdc6e3, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(recfun.CountChangeSuite, sbt.SubclassFingerprintWrapper@16cdc6e3, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mRunning TaskDef(recfun.BalanceSuite, sbt.SubclassFingerprintWrapper@16cdc6e3, false, [SuiteSelector])[0m
+[0m[[0mdebug[0m] [0mSummary for ScalaCheck not available.[0m
+[0m[[0mdebug[0m] [0mSummary for ScalaTest not available.[0m
+[0m[[0minfo[0m] [0mPassed: Total 12, Failed 0, Errors 0, Passed 12[0m
+[0m[[0mdebug[0m] [0mPassed tests:[0m
+[0m[[0mdebug[0m] [0m	recfun.CountChangeSuite[0m
+[0m[[0mdebug[0m] [0m	recfun.PascalSuite[0m
+[0m[[0mdebug[0m] [0m	recfun.BalanceSuite[0m
